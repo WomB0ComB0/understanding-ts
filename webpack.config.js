@@ -1,30 +1,30 @@
 const path = require('path');
+
 module.exports = {
-  mode: 'development', // set mode to development or production
+  mode: 'development',
   entry: './src/app.ts',
+  devServer: {
+    static: [
+      {
+        directory: path.join(__dirname),
+      },
+    ],
+  },
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'), // __dirname is a global variable that holds the absolute path of the current directory
-    publicPath: '/dist/' // public path for dev server
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/dist/'
   },
-  devtool: 'inline-source-map', // generate source maps for debugging
   module: {
     rules: [
       {
-        test: /\.ts$/, 
-        use: 'ts-loader', 
+        test: /\.tsx?$/,
+        use: 'ts-loader',
         exclude: /node_modules/
       }
     ]
   },
   resolve: {
-    extensions: ['.ts', '.js'] // resolve extensions for imports
-  },
-  devServer: {
-    static: [
-      {
-        directory: path.join(__dirname),
-      }
-    ]
+    extensions: ['.ts', '.js']
   }
 };
